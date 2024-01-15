@@ -1,23 +1,19 @@
-name: Check Python Version
+name: check_python_version
 
 on:
-  push:
-    branches:
-      - main
+    push:
+      branches:
+        - check_python_version
 
 jobs:
-  check_python_version:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.11
-
-    - name: Update pip
-      run: |
-        python -m pip install --upgrade pip
-
-    - name: Display Python version
-      run: python --version
+        python-version: '3.11'
+    - name: Display Python version 
+      run: python -c "import sys; printf(sys.version)"
